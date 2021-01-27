@@ -6,12 +6,12 @@ package com.xxl.job.core.util;
  */
 public class ShardingUtil {
 
-    private static InheritableThreadLocal<ShardingVO> contextHolder = new InheritableThreadLocal<ShardingVO>();
+    private static InheritableThreadLocal<ShardingVO> contextHolder = new InheritableThreadLocal<>();
 
     public static class ShardingVO {
 
-        private int index;  // sharding index
-        private int total;  // sharding total
+        private int index;  // 分片索引
+        private int total;  // 分片总数
 
         public ShardingVO(int index, int total) {
             this.index = index;
