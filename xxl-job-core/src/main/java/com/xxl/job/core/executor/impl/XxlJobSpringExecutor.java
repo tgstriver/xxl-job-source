@@ -36,7 +36,7 @@ public class XxlJobSpringExecutor extends XxlJobExecutor implements ApplicationC
         /*initJobHandlerRepository(applicationContext);*/
 
         // init JobHandler Repository (for method)
-        initJobHandlerMethodRepository(applicationContext);
+        this.initJobHandlerMethodRepository(applicationContext);
 
         // refresh GlueFactory
         GlueFactory.refreshInstance(1);
@@ -140,6 +140,7 @@ public class XxlJobSpringExecutor extends XxlJobExecutor implements ApplicationC
                         throw new RuntimeException("xxl-job method-jobhandler initMethod invalid, for[" + bean.getClass() + "#" + method.getName() + "] .");
                     }
                 }
+
                 if (xxlJob.destroy().trim().length() > 0) {
                     try {
                         destroyMethod = bean.getClass().getDeclaredMethod(xxlJob.destroy());

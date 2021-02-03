@@ -128,12 +128,7 @@ public class JobThread extends Thread{
 						Thread futureThread = null;
 						try {
 							final TriggerParam triggerParamTmp = triggerParam;
-							FutureTask<ReturnT<String>> futureTask = new FutureTask<ReturnT<String>>(new Callable<ReturnT<String>>() {
-								@Override
-								public ReturnT<String> call() throws Exception {
-									return handler.execute(triggerParamTmp.getExecutorParams());
-								}
-							});
+							FutureTask<ReturnT<String>> futureTask = new FutureTask<>(() -> handler.execute(triggerParamTmp.getExecutorParams()));
 							futureThread = new Thread(futureTask);
 							futureThread.start();
 
@@ -143,7 +138,7 @@ public class JobThread extends Thread{
 							XxlJobLogger.log("<br>----------- xxl-job job execute timeout");
 							XxlJobLogger.log(e);
 
-							executeResult = new ReturnT<String>(IJobHandler.FAIL_TIMEOUT.getCode(), "job execute timeout ");
+							executeResult = new ReturnT<>(IJobHandler.FAIL_TIMEOUT.getCode(), "job execute timeout ");
 						} finally {
 							futureThread.interrupt();
 						}
